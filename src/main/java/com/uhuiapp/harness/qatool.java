@@ -12,7 +12,7 @@ public class qatool {
         testNG.setVerbose(-1);
         testNG.setTestSuites(QAContext.qAconfig.getTestSuites());
         testNG.setOutputDirectory(QAContext.qAconfig.getTestNGOutputDirectory());
-        testNG.addListener(new ExtentTestNGIReporterListener());
+        //testNG.addListener(new ExtentTestNGIReporterListener());
         testNG.run();
         System.exit(testNG.getStatus());
     }

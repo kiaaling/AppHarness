@@ -23,7 +23,7 @@ public class QAconfig {
     }
 
     public List<String> getTestSuites() {
-        List suites = Lists.newArrayList();
+        List<String> suites = Lists.newArrayList();
         String suitesRootDir = getSuitesRootDir();
         setSuitesByDirectory(suites, suitesRootDir);
         return suites;
@@ -45,7 +45,7 @@ public class QAconfig {
         }
     }
 
-    private void setSuitesByDirectory(List suites, String suitesRootDir) {
+    private void setSuitesByDirectory(List<String> suites, String suitesRootDir) {
         File folder = new File(suitesRootDir);
         if (!folder.exists()) {
             System.out.println("The test suite directory doesn't exist!");
