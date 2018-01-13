@@ -20,6 +20,10 @@ ext {
     springVersion = '3.2.16.RELEASE'
     strutsGroup = 'org.apache.struts'
     strutsVersion = '2.3.24.1'
+    testNGGroup = 'org.testng'
+    testNGVersion = '6.13.1'
+    appiumGroup = 'io.appium'
+    appiumClientVersion = '5.0.4'
 }
 
 repositories {
@@ -33,8 +37,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    compile 'org.testng:testng:6.9.10'
-    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
+    compile "$testNGGroup:testng:$testNGVersion"
+    compile "$appiumGroup:java-client:$appiumClientVersion"
+
+/*    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'commons-configuration:commons-configuration:1.10'
     compile "$springGroup:spring-context:$springVersion"
     compile "$springGroup:spring-jdbc:$springVersion"
@@ -43,12 +49,8 @@ dependencies {
     compile 'org.mybatis:mybatis-spring:1.2.3'
     compile 'org.mybatis:mybatis:3.3.0'
     compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.25'
-    compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
-    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.4.0'
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver', version: '2.52.0'
-    compile group: 'com.aventstack', name: 'extentreports', version: '3.0.3'
 
-    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'*/
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
