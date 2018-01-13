@@ -6,3 +6,6 @@ target
 testng-reports
 cucumber-reports
 logs
+*.iml
+*.ipr
+*.iws
