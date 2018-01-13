@@ -53,7 +53,7 @@ public class WebDriverFactory {
         } else if (browserType.equalsIgnoreCase("safari")) {
             capability = DesiredCapabilities.safari();
         } else if (browserType.equalsIgnoreCase("htmlunit")) {
-            capability = DesiredCapabilities.htmlUnitWithJs();
+            capability = DesiredCapabilities.htmlUnit();
         } else {
             System.out.println("The browserType [" + browserType + "] doesn't be supproted. It can only be ie|firefox|chrome|safari|htmlunit");
             System.exit(1);

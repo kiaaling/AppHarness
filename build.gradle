@@ -5,7 +5,7 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'application'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 mainClassName = 'com.uhuiapp.harness.qatool'
 
 def svnversion = new ByteArrayOutputStream()
@@ -34,11 +34,21 @@ repositories {
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 }
 
 dependencies {
     compile "$testNGGroup:testng:$testNGVersion"
     compile "$appiumGroup:java-client:$appiumClientVersion"
+//    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
+    compile 'commons-configuration:commons-configuration:1.10'
+    compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.25'
+    compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.4.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver', version: '2.52.0'
+    compile group: 'com.aventstack', name: 'extentreports', version: '3.0.3'
+
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
 
 /*    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'commons-configuration:commons-configuration:1.10'
