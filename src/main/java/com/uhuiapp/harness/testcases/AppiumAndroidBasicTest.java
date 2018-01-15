@@ -1,19 +1,24 @@
 package com.uhuiapp.harness.testcases;
 
 import io.appium.java_client.android.AndroidDriver;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * Created by zhaoxiong on 2018/1/15.
  */
 public class AppiumAndroidBasicTest {
+    private static final Logger log = LogManager.getLogger(AppiumAndroidBasicTest.class);
+
     protected AndroidDriver driver;
 
     @BeforeSuite
@@ -29,6 +34,7 @@ public class AppiumAndroidBasicTest {
 
         driver = new AndroidDriver(remoteUrl, desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        log.info("Initial driver successfully!");
     }
 
 

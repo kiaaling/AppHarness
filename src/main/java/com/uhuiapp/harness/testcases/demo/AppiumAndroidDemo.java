@@ -6,9 +6,12 @@ package com.uhuiapp.harness.testcases.demo;
 import com.uhuiapp.harness.testcases.AppiumAndroidBasicTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
 public class AppiumAndroidDemo extends AppiumAndroidBasicTest{
+    private static final Logger log = LogManager.getLogger(AppiumAndroidDemo.class);
 
     @Test
     public void sampleTest() {
@@ -43,6 +46,7 @@ public class AppiumAndroidDemo extends AppiumAndroidBasicTest{
 
         MobileElement el11 = (MobileElement) driver.findElementById("cn.uhui.cqt.talent:id/btSubmit");
         el11.click();
+        log.info("成功保存个人信息！");
     }
 
 }
