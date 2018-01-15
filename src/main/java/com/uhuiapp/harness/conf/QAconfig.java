@@ -99,6 +99,35 @@ public class QAconfig {
         return configuration.getString("harness.selenium.server", "http://localhost:4444/wd/hub");
     }
 
+    public String getAppiumServerUrl() {
+        return configuration.getString("harness.appium.server", "http://localhost:4723/wd/hub");
+    }
+
+    public String getAndroidAppPath(){
+        return configuration.getString("harness.android.app.path", "/tmp/testapp.apk");
+    }
+
+    public String getAndroidDeviceName(){
+        return configuration.getString("harness.android.device.name", "Android Emulator");
+    }
+
+    public String getAndroidOSVersion(){
+        return configuration.getString("harness.android.os.version", "7.0.0");
+    }
+
+
+    public String getIOSAppPath(){
+        return configuration.getString("harness.ios.app.path", "/tmp/RecruitPlatformAPP.app");
+    }
+
+    public String getIOSDeviceName(){
+        return configuration.getString("harness.ios.device.name", "Android Emulator");
+    }
+
+    public String getIOSOSVersion(){
+        return configuration.getString("harness.ios.os.version", "7.0.0");
+    }
+
     public String getSeleniumDriverType() {
         return configuration.getString("harness.webdriver.type", "local");
     }
