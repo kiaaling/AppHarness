@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="个人求职者端测试" verbose="1" thread-count="1" parallel="tests" configfailurepolicy="continue">
+
+    <test name="编辑个人简历">
+        <classes>
+            <class name="com.uhuiapp.harness.testcases.common.EditPersonalInformation"/>
+        </classes>
+    </test>
+
+</suite>

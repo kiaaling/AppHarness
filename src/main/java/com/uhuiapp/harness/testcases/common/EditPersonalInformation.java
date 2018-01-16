@@ -1,17 +1,17 @@
-package com.uhuiapp.harness.testcases.demo;
+package com.uhuiapp.harness.testcases.common;
 
-/**
- * Created by zhaoxiong on 2018/1/13.
- */
-import com.uhuiapp.harness.testcases.AppiumAndroidBasicTest;
+import com.uhuiapp.harness.testcases.AppiumBasicTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-public class AppiumAndroidDemo extends AppiumAndroidBasicTest{
-    private static final Logger log = LogManager.getLogger(AppiumAndroidDemo.class);
+/**
+ * Created by zhaoxiong on 2018/1/15.
+ */
+public class EditPersonalInformation  extends AppiumBasicTest {
+    private static final Logger log = LogManager.getLogger(EditPersonalInformation.class);
 
     @Test
     public void sampleTest() {
@@ -48,5 +48,6 @@ public class AppiumAndroidDemo extends AppiumAndroidBasicTest{
         el11.click();
         log.info("成功保存个人信息！");
     }
+
 
 }
