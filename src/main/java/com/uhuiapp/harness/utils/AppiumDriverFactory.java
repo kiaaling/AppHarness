@@ -41,13 +41,16 @@ public class AppiumDriverFactory {
         }else if(driverType.toLowerCase().equals("windows")){
             createWindowsDriver();
         }else if(driverType.toLowerCase().equals("selenium")){
-            createSeleniumDriver("local","firefox");
+            createSeleniumDriver(QAContext.qAconfig.getSeleniumDriverType(),QAContext.qAconfig.getSeleniumDriverBrowser());
+        }else{
+            log.error("不支持的应用类型，请指定正确的应用类型。本工具仅支持： android|ios|windows|web");
+            System.exit(1);
         }
         return driver;
     }
 
     private void createWindowsDriver() {
-
+        //TODO
     }
 
     private void createIOSDriver() throws MalformedURLException{

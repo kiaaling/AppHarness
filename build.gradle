@@ -41,6 +41,7 @@ dependencies {
     compile "$testNGGroup:testng:$testNGVersion"
     compile "$appiumGroup:java-client:$appiumClientVersion"
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
 //    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'commons-configuration:commons-configuration:1.10'
     compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.25'

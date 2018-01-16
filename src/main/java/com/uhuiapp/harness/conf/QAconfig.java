@@ -12,6 +12,7 @@ import java.util.List;
 
 public class QAconfig {
     private Configuration configuration;
+    private String appType = "";
 
     public QAconfig() {
         try {
@@ -126,6 +127,13 @@ public class QAconfig {
 
     public String getIOSOSVersion(){
         return configuration.getString("harness.ios.os.version", "7.0.0");
+    }
+    public void setAppType(String appType){
+        this.appType = appType;
+    }
+
+    public String getAppType(){
+        return  this.appType;
     }
 
     public String getSeleniumDriverType() {
