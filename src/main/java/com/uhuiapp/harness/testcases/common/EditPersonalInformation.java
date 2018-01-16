@@ -1,6 +1,7 @@
 package com.uhuiapp.harness.testcases.common;
 
 import com.uhuiapp.harness.testcases.AppiumBasicTest;
+import com.uhuiapp.harness.utils.QAContext;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,28 @@ public class EditPersonalInformation  extends AppiumBasicTest {
 
     @Test
     public void sampleTest() {
+        //for IOS
+        if(QAContext.qAconfig.getAppType().equals("ios")){
+            MobileElement el1 = findElementById("buttonGotoPersonLogin");
+            el1.click();
+        }else if("android".equals(QAContext.qAconfig.getAppType())){
+            MobileElement selectServer = findElementById("btIp3");
+            selectServer.click();
+        }
+
+        MobileElement el2 = findElementById("buttonAccountLogin");
+        el2.click();
+        MobileElement el3 = findElementById("inputAccount");
+        el3.click();
+        el3.sendKeys("18222618300");
+        MobileElement el4 = findElementById("inputPassword");
+        el4.click();
+        el4.sendKeys("654321");
+        MobileElement el5 = findElementById("buttonLogin");
+        el5.click();
+
+        //For android
+/*
         MobileElement el1 = (MobileElement) driver.findElementById("cn.uhui.cqt.talent:id/btIp3");
         el1.click();
         MobileElement el2 = (MobileElement) driver.findElementById("cn.uhui.cqt.talent:id/btAccountLogin");
@@ -35,19 +58,13 @@ public class EditPersonalInformation  extends AppiumBasicTest {
         el9.click();
         MobileElement el10 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout");
         el10.click();
-        try {
-            Thread.sleep(1000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        waitSeconds(1);
 
         TouchAction scrollUp = new TouchAction(driver);
         scrollUp.press(604,2312).moveTo(-16,-433).release().perform();
 
         MobileElement el11 = (MobileElement) driver.findElementById("cn.uhui.cqt.talent:id/btSubmit");
         el11.click();
-        log.info("成功保存个人信息！");
+        log.info("成功保存个人信息！");*/
     }
-
-
 }

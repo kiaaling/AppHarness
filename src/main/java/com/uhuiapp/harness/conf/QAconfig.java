@@ -113,20 +113,23 @@ public class QAconfig {
     }
 
     public String getAndroidOSVersion(){
-        return configuration.getString("harness.android.os.version", "7.0.0");
+        return configuration.getString("harness.android.os.version", "7.1");
     }
 
+    public String getAndroidResourceIdPrefix(){
+        return configuration.getString("harness.android.resource.id.prefix", "");
+    }
 
     public String getIOSAppPath(){
         return configuration.getString("harness.ios.app.path", "/tmp/RecruitPlatformAPP.app");
     }
 
     public String getIOSDeviceName(){
-        return configuration.getString("harness.ios.device.name", "Android Emulator");
+        return configuration.getString("harness.ios.device.name", "iPhone 8 Plus");
     }
 
     public String getIOSOSVersion(){
-        return configuration.getString("harness.ios.os.version", "7.0.0");
+        return configuration.getString("harness.ios.os.version", "11.2");
     }
     public void setAppType(String appType){
         this.appType = appType;

@@ -3,6 +3,7 @@ package com.uhuiapp.harness.testcases;
 import com.uhuiapp.harness.utils.AppiumDriverFactory;
 import com.uhuiapp.harness.utils.QAContext;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.windows.WindowsDriver;
@@ -31,7 +32,7 @@ public class AppiumBasicTest {
         }else if("windows".equals(appType.toLowerCase())){
             driver = (WindowsDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
         }else if("web".equals(appType.toLowerCase())){
-            driver = (WindowsDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver("selenium");
+            driver = (AppiumDriver) AppiumDriverFactory.getUniqueInstance().getAppiumDriver("selenium");
         }else {
             log.error("不支持的应用类型，请指定正确的应用类型。本工具仅支持： android|ios|windows|web");
             System.exit(1);
@@ -42,5 +43,29 @@ public class AppiumBasicTest {
     @AfterSuite
     public void tearDown() {
         driver.quit();
+    }
+
+    public MobileElement findElementById(String id){
+        String appType = QAContext.qAconfig.getAppType();
+        MobileElement element;
+        if("android".equals(appType)){
+            String elementId = QAContext.qAconfig.getAndroidResourceIdPrefix()+id;
+            element = (MobileElement)driver.findElementById(elementId);
+            return element;
+        }else if("ios".equals(appType)){
+            element = (MobileElement)driver.findElementByAccessibilityId(id);
+            return element;
+        }else {
+            element = (MobileElement)driver.findElementById(id);
+            return element;
+        }
+    }
+
+    protected void waitSeconds(int seconds) {
+        try {
+            Thread.sleep(1000*seconds);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.uhuiapp.harness.utils;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -63,7 +64,7 @@ public class AppiumDriverFactory {
 
         URL remoteUrl = new URL(QAContext.qAconfig.getAppiumServerUrl());
 
-        driver = new AndroidDriver(remoteUrl, desiredCapabilities);
+        driver = new IOSDriver(remoteUrl, desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         log.info("Initial driver successfully!");
     }
