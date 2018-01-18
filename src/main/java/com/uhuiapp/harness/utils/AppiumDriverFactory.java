@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -126,7 +127,8 @@ public class AppiumDriverFactory {
             setFirefoxOptions();
             driver = new FirefoxDriver();
         } else if (browserType.equalsIgnoreCase("chrome")) {
-            setChromeOptions();
+            ChromeOptions options = new ChromeOptions();
+            setChromeOptions(options);
             driver = new ChromeDriver();
         } else if (browserType.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
@@ -142,12 +144,13 @@ public class AppiumDriverFactory {
         System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
     }
 
-    private void setChromeOptions() {
+    private void setChromeOptions(ChromeOptions options) {
         if(System.getProperty("os.name").indexOf("Mac") != -1){
             System.setProperty("webdriver.chrome.driver", "drivers/mac/chromedriver");
         }else if(System.getProperty("os.name").indexOf("Windows") != -1){
-            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "drivers/win32/chromedriver.exe");
         }
+        options.addArguments("disable-infobars");
     }
 
     private void setFirefoxOptions() {

@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 /**
@@ -16,16 +17,7 @@ public class EditPersonalInformation  extends AppiumBasicTest {
 
     @Test
     public void sampleTest() {
-        MobileElement el2 = findElementById("buttonAccountLogin");
-        el2.click();
-        MobileElement el3 = findElementById("inputAccount");
-        el3.click();
-        el3.sendKeys("18222618300");
-        MobileElement el4 = findElementById("inputPassword");
-        el4.click();
-        el4.sendKeys("654321");
-        MobileElement el5 = findElementById("buttonLogin");
-        el5.click();
+        loginToSystem();
 
         //For android
 /*
@@ -57,5 +49,21 @@ public class EditPersonalInformation  extends AppiumBasicTest {
         MobileElement el11 = (MobileElement) driver.findElementById("cn.uhui.cqt.talent:id/btSubmit");
         el11.click();
         log.info("成功保存个人信息！");*/
+    }
+
+    private void loginToSystem() {
+        WebElement el2 = findElementById("buttonAccountLogin");
+        el2.click();
+        WebElement el3 = findElementById("inputAccount");
+        el3.click();
+        el3.sendKeys("18222618300");
+        WebElement el4 = findElementById("inputPassword");
+        el4.click();
+        el4.sendKeys("654321");
+        WebElement el5 = findElementById("buttonLogin");
+        el5.click();
+        waitSeconds(2);
+        findElementById("buttonGotoResumeEdit");
+        log.info("Login to system successfully!");
     }
 }
