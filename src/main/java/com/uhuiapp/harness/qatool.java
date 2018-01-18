@@ -11,7 +11,6 @@ import java.util.List;
 
 public class qatool {
     public static void main(String[] args){
-        setSystemProperties();
 
         Options options = getCommandOptions();
         try {
@@ -26,14 +25,9 @@ public class qatool {
         testNG.setVerbose(-1);
         testNG.setTestSuites(QAContext.qAconfig.getTestSuites());
         testNG.setOutputDirectory(QAContext.qAconfig.getTestNGOutputDirectory());
-        testNG.addListener(new ExtentTestNGIReporterListener());
+        //testNG.addListener(new ExtentTestNGIReporterListener());
         testNG.run();
         System.exit(testNG.getStatus());
-    }
-
-    private static void setSystemProperties() {
-        System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
     }
 
     private static void parserCommandLineArgs(String[] args, Options options) throws ParseException {

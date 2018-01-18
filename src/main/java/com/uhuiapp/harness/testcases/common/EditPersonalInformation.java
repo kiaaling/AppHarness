@@ -16,15 +16,6 @@ public class EditPersonalInformation  extends AppiumBasicTest {
 
     @Test
     public void sampleTest() {
-        //for IOS
-        if(QAContext.qAconfig.getAppType().equals("ios")){
-            MobileElement el1 = findElementById("buttonGotoPersonLogin");
-            el1.click();
-        }else if("android".equals(QAContext.qAconfig.getAppType())){
-            MobileElement selectServer = findElementById("btIp3");
-            selectServer.click();
-        }
-
         MobileElement el2 = findElementById("buttonAccountLogin");
         el2.click();
         MobileElement el3 = findElementById("inputAccount");

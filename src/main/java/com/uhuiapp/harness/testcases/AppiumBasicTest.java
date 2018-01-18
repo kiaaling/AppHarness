@@ -12,8 +12,6 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import java.net.MalformedURLException;
-
 /**
  * Created by zhaoxiong on 2018/1/15.
  */
@@ -23,26 +21,21 @@ public class AppiumBasicTest {
     protected AppiumDriver driver;
 
     @BeforeSuite
-    public void setUp() throws MalformedURLException {
-        String appType = QAContext.qAconfig.getAppType();
-        if("android".equals(appType.toLowerCase())){
-            driver = (AndroidDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("ios".equals(appType.toLowerCase())){
-            driver = (IOSDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("windows".equals(appType.toLowerCase())){
-            driver = (WindowsDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("web".equals(appType.toLowerCase())){
-            driver = (AppiumDriver) AppiumDriverFactory.getUniqueInstance().getAppiumDriver("selenium");
-        }else {
-            log.error("不支持的应用类型，请指定正确的应用类型。本工具仅支持： android|ios|windows|web");
-            System.exit(1);
-        }
+    public void setUp() throws Exception {
+        log.info("Start initial test Env");
+        initialAppuimDriver();
+        initialTestApplication();
     }
-
 
     @AfterSuite
     public void tearDown() {
+        if("web".equalsIgnoreCase(QAContext.qAconfig.getAppType())){
+            driver.close();
+        }else {
+            driver.closeApp();
+        }
         driver.quit();
+        log.info("Close app and quit driver.");
     }
 
     public MobileElement findElementById(String id){
@@ -66,6 +59,34 @@ public class AppiumBasicTest {
             Thread.sleep(1000*seconds);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    private void initialAppuimDriver() throws Exception {
+        String appType = QAContext.qAconfig.getAppType();
+        if("android".equals(appType.toLowerCase())){
+            driver = (AndroidDriver) AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
+        }else if("ios".equals(appType.toLowerCase())){
+            driver = (IOSDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
+        }else if("windows".equals(appType.toLowerCase())){
+            driver = (WindowsDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
+        }else if("web".equals(appType.toLowerCase())){
+            driver = (AppiumDriver) AppiumDriverFactory.getUniqueInstance().getAppiumDriver("selenium");
+        }else {
+            log.error("不支持的应用类型，请指定正确的应用类型。本工具仅支持： android|ios|windows|web");
+            System.exit(1);
+        }
+    }
+
+    private void initialTestApplication() {
+        if(QAContext.qAconfig.getAppType().equals("ios")){
+            MobileElement el1 = findElementById("buttonGotoPersonLogin");
+            el1.click();
+        }else if("android".equals(QAContext.qAconfig.getAppType())){
+            MobileElement selectServer = findElementById("btIp3");
+            selectServer.click();
+        }else if("web".equals(QAContext.qAconfig.getAppType())){
+            driver.get(QAContext.qAconfig.getBaseUrl());
         }
     }
 }

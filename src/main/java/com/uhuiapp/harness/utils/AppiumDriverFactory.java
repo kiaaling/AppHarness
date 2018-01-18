@@ -34,7 +34,7 @@ public class AppiumDriverFactory {
         return uniqueInstance;
     }
 
-    public WebDriver getAppiumDriver(String driverType) throws MalformedURLException {
+    public WebDriver getAppiumDriver(String driverType) throws Exception {
         if(driverType.toLowerCase().equals("android")){
             createAndroidDriver();
         }else if(driverType.toLowerCase().equals("ios")){
@@ -120,10 +120,13 @@ public class AppiumDriverFactory {
 
     private void createLocalWebDriver(String browserType) {
         if (browserType.equalsIgnoreCase("ie")) {
+            setInternetExplorerOptions();
             driver = new InternetExplorerDriver();
         } else if (browserType.equalsIgnoreCase("firefox")) {
+            setFirefoxOptions();
             driver = new FirefoxDriver();
         } else if (browserType.equalsIgnoreCase("chrome")) {
+            setChromeOptions();
             driver = new ChromeDriver();
         } else if (browserType.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
@@ -132,6 +135,33 @@ public class AppiumDriverFactory {
         } else {
             System.out.println("The browserType [" + browserType + "] doesn't be supproted. It can only be ie|firefox|chrome|safari|htmlunit");
             System.exit(1);
+        }
+    }
+
+    private void setInternetExplorerOptions() {
+        System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+    }
+
+    private void setChromeOptions() {
+        if(System.getProperty("os.name").indexOf("Mac") != -1){
+            System.setProperty("webdriver.chrome.driver", "drivers/mac/chromedriver");
+        }else if(System.getProperty("os.name").indexOf("Windows") != -1){
+            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        }
+    }
+
+    private void setFirefoxOptions() {
+        System.setProperty("webdriver.firefox.logfile", "logs/firefox_output.log");
+        System.setProperty("webdriver.firefox.profile", "SeleniumTest");
+        //webdriver.firefox.marionette default is true, it need geckodriver. But, the geckodriver is not yet feature complete currently. This means that it does not yet offer full conformance with the WebDriver.
+        //So we set marionette to false.
+        System.setProperty("webdriver.firefox.marionette", "false");
+        if(System.getProperty("os.name").indexOf("Mac") != -1){
+            System.setProperty("webdriver.gecko.driver", "drivers/mac/geckodriver");
+            //System.setProperty("webdriver.firefox.bin", "/Applications/Firefox.app/Contents/MacOS/firefox-bin");
+        }else if(System.getProperty("os.name").indexOf("Windows") != -1){
+            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+            //System.setProperty("webdriver.firefox.bin", "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe");
         }
     }
 }
