@@ -4,7 +4,7 @@
 
     <test name="编辑个人简历">
         <classes>
-            <class name="com.uhuiapp.harness.testcases.common.EditPersonalInformation"/>
+            <class name="com.uhuiapp.harness.testcases.common.person.EditResumeTest"/>
         </classes>
     </test>
 

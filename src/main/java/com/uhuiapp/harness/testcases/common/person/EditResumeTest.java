@@ -1,9 +1,6 @@
-package com.uhuiapp.harness.testcases.common;
+package com.uhuiapp.harness.testcases.common.person;
 
 import com.uhuiapp.harness.testcases.AppiumBasicTest;
-import com.uhuiapp.harness.utils.QAContext;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -12,11 +9,11 @@ import org.testng.annotations.Test;
 /**
  * Created by zhaoxiong on 2018/1/15.
  */
-public class EditPersonalInformation  extends AppiumBasicTest {
-    private static final Logger log = LogManager.getLogger(EditPersonalInformation.class);
+public class EditResumeTest extends AppiumBasicTest {
+    private static final Logger log = LogManager.getLogger(EditResumeTest.class);
 
     @Test
-    public void sampleTest() {
+    public void editPersonalInformationTest() {
         loginToSystem();
 
         //For android

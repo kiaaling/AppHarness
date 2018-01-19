@@ -21,8 +21,8 @@ import org.testng.annotations.BeforeSuite;
 public class AppiumBasicTest {
     private static final Logger log = LogManager.getLogger(AppiumBasicTest.class);
 
-    protected AppiumDriver driver;
-    protected WebDriver selenium;
+    private AppiumDriver driver;
+    private WebDriver selenium;
 
     @BeforeSuite
     public void setUp() throws Exception {
@@ -43,7 +43,7 @@ public class AppiumBasicTest {
         log.info("Close app and quit driver.");
     }
 
-    public WebElement findElementById(String id){
+    protected WebElement findElementById(String id){
         String appType = QAContext.qAconfig.getAppType();
         WebElement element;
         if("android".equals(appType)){

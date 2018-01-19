@@ -88,9 +88,11 @@ public class AppiumDriverFactory {
     private void createSeleniumDriver(String driverType, String browserType) {
         if (driverType.toLowerCase().equals("local")) {
             createLocalWebDriver(browserType);
+            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         } else if (driverType.toLowerCase().equals("remote")) {
             try {
                 createRemoteWebDriver(browserType);
+                driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -141,7 +143,7 @@ public class AppiumDriverFactory {
     }
 
     private void setInternetExplorerOptions() {
-        System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+        System.setProperty("webdriver.ie.driver", "drivers/win32/IEDriverServer.exe");
     }
 
     private void setChromeOptions(ChromeOptions options) {
@@ -163,7 +165,7 @@ public class AppiumDriverFactory {
             System.setProperty("webdriver.gecko.driver", "drivers/mac/geckodriver");
             //System.setProperty("webdriver.firefox.bin", "/Applications/Firefox.app/Contents/MacOS/firefox-bin");
         }else if(System.getProperty("os.name").indexOf("Windows") != -1){
-            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", "drivers/win32/geckodriver.exe");
             //System.setProperty("webdriver.firefox.bin", "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe");
         }
     }
