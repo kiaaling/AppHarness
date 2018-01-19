@@ -4,6 +4,7 @@ import com.uhuiapp.harness.utils.AppiumDriverFactory;
 import com.uhuiapp.harness.utils.QAContext;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.windows.WindowsDriver;
@@ -43,6 +44,20 @@ public class AppiumBasicTest {
         log.info("Close app and quit driver.");
     }
 
+    protected boolean isMobileApp(){
+        String appType = QAContext.qAconfig.getAppType();
+        if("ios".equalsIgnoreCase(appType)||"android".equalsIgnoreCase(appType)){
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
+    protected void touchActionScrollScreen(int startX, int startY, int endX, int endY){
+        TouchAction scrollUp =new TouchAction(driver);
+        scrollUp.press(startX,startY).moveTo(endX,endY).release().perform();
+    }
+
     protected WebElement findElementById(String id){
         String appType = QAContext.qAconfig.getAppType();
         WebElement element;
@@ -60,6 +75,11 @@ public class AppiumBasicTest {
             element = driver.findElementById(id);
             return element;
         }
+    }
+
+    protected WebElement findElementByXPath(String xpath){
+        WebElement element = driver.findElementByXPath(xpath);
+        return  element;
     }
 
     protected void waitSeconds(int seconds) {
