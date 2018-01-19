@@ -44,14 +44,14 @@ public class EditResumeTest extends AppiumBasicTest {
 
         WebElement constellation = findElementById("selectConstellation");
         constellation.click();
-        WebElement selectConstellationValue = findElementByXPath("//*[@text=\"天蝎座\"");
+        WebElement selectConstellationValue = findElementByXPath("//*[@text=\"金牛座\"]");
         selectConstellationValue.click();
 
-        WebElement birthDay = findElementById("inputBirthdayYearMonth");
+/*        WebElement birthDay = findElementById("inputBirthdayYearMonth");
         birthDay.sendKeys("1992-08");
 
         WebElement startWorkDay = findElementById("inputStartWorkYearMonth");
-        startWorkDay.sendKeys("2014-09");
+        startWorkDay.sendKeys("2014-09");*/
 
         WebElement currentCity = findElementById("selectCurrentCity");
         currentCity.click();
@@ -75,7 +75,7 @@ public class EditResumeTest extends AppiumBasicTest {
 
         WebElement submit = findElementById("buttonSubmit");
         submit.click();
-        findElementById("buttonGotoResumeEdit");
+        findElementById("buttonGotoPersonalInformation");
         log.info("成功保存个人信息！");
     }
 
@@ -98,6 +98,4 @@ public class EditResumeTest extends AppiumBasicTest {
         findElementById("buttonGotoResumeEdit");
         log.info("Login to system successfully!");
     }
-
-
 }
