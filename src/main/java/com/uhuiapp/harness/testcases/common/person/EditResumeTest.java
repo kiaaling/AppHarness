@@ -47,11 +47,11 @@ public class EditResumeTest extends AppiumBasicTest {
         WebElement selectConstellationValue = findElementByXPath("//*[@text=\"金牛座\"]");
         selectConstellationValue.click();
 
-/*        WebElement birthDay = findElementById("inputBirthdayYearMonth");
+        WebElement birthDay = findElementById("inputBirthdayYearMonth");
         birthDay.sendKeys("1992-08");
 
         WebElement startWorkDay = findElementById("inputStartWorkYearMonth");
-        startWorkDay.sendKeys("2014-09");*/
+        startWorkDay.sendKeys("2014-09");
 
         WebElement currentCity = findElementById("selectCurrentCity");
         currentCity.click();

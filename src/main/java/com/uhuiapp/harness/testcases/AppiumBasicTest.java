@@ -3,7 +3,6 @@ package com.uhuiapp.harness.testcases;
 import com.uhuiapp.harness.utils.AppiumDriverFactory;
 import com.uhuiapp.harness.utils.QAContext;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -17,7 +16,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 /**
- * Created by zhaoxiong on 2018/1/15.
+ * Created by ZhangZhaoxiong on 2018/1/15.
+ * This is the Test Class parent.
  */
 public class AppiumBasicTest {
     private static final Logger log = LogManager.getLogger(AppiumBasicTest.class);
@@ -78,8 +78,7 @@ public class AppiumBasicTest {
     }
 
     protected WebElement findElementByXPath(String xpath){
-        WebElement element = driver.findElementByXPath(xpath);
-        return  element;
+        return  driver.findElementByXPath(xpath);
     }
 
     protected void waitSeconds(int seconds) {
