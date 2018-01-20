@@ -24,6 +24,11 @@ public class AppiumBasicTest {
 
     private AppiumDriver driver;
     private WebDriver selenium;
+    private String appType;
+
+    public AppiumBasicTest(){
+        this.appType = QAContext.qAconfig.getAppType();
+    }
 
     @BeforeSuite
     public void setUp() throws Exception {
@@ -34,7 +39,7 @@ public class AppiumBasicTest {
 
     @AfterSuite
     public void tearDown() {
-        if("web".equalsIgnoreCase(QAContext.qAconfig.getAppType())){
+        if("web".equalsIgnoreCase(appType)){
             selenium.close();
             selenium.quit();
         }else {
@@ -45,21 +50,19 @@ public class AppiumBasicTest {
     }
 
     protected boolean isMobileApp(){
-        String appType = QAContext.qAconfig.getAppType();
-        if("ios".equalsIgnoreCase(appType)||"android".equalsIgnoreCase(appType)){
-            return true;
-        }else{
-            return  false;
-        }
+        return "ios".equalsIgnoreCase(appType)||"android".equalsIgnoreCase(appType);
     }
 
     protected void touchActionScrollScreen(int startX, int startY, int endX, int endY){
+        if(driver == null){
+            log.error("PC Web端应用不能调用TouchAction.");
+            return;
+        }
         TouchAction scrollUp =new TouchAction(driver);
         scrollUp.press(startX,startY).moveTo(endX,endY).release().perform();
     }
 
     protected WebElement findElementById(String id){
-        String appType = QAContext.qAconfig.getAppType();
         WebElement element;
         if("android".equals(appType)){
             String elementId = QAContext.qAconfig.getAndroidResourceIdPrefix()+id;
@@ -78,7 +81,11 @@ public class AppiumBasicTest {
     }
 
     protected WebElement findElementByXPath(String xpath){
-        return  driver.findElementByXPath(xpath);
+        if("web".equals(appType)){
+            return selenium.findElement(By.xpath(xpath));
+        }else{
+            return  driver.findElementByXPath(xpath);
+        }
     }
 
     protected void waitSeconds(int seconds) {
@@ -90,14 +97,13 @@ public class AppiumBasicTest {
     }
 
     private void initialAppuimDriver() throws Exception {
-        String appType = QAContext.qAconfig.getAppType();
-        if("android".equals(appType.toLowerCase())){
+        if("android".equalsIgnoreCase(appType)){
             driver = (AndroidDriver) AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("ios".equals(appType.toLowerCase())){
+        }else if("ios".equalsIgnoreCase(appType)){
             driver = (IOSDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("windows".equals(appType.toLowerCase())){
+        }else if("windows".equalsIgnoreCase(appType)){
             driver = (WindowsDriver)AppiumDriverFactory.getUniqueInstance().getAppiumDriver(appType);
-        }else if("web".equals(appType.toLowerCase())){
+        }else if("web".equalsIgnoreCase(appType)){
             selenium = AppiumDriverFactory.getUniqueInstance().getAppiumDriver("selenium");
         }else {
             log.error("不支持的应用类型，请指定正确的应用类型。本工具仅支持： android|ios|windows|web");
@@ -106,13 +112,13 @@ public class AppiumBasicTest {
     }
 
     private void initialTestApplication() {
-        if(QAContext.qAconfig.getAppType().equals("ios")){
+        if(appType.equals("ios")){
             WebElement el1 = findElementById("buttonGotoPersonLogin");
             el1.click();
-        }else if("android".equals(QAContext.qAconfig.getAppType())){
+        }else if("android".equals(appType)){
             WebElement selectServer = findElementById("btIp3");
             selectServer.click();
-        }else if("web".equals(QAContext.qAconfig.getAppType())){
+        }else if("web".equals(appType)){
             selenium.get(QAContext.qAconfig.getBaseUrl());
         }
     }
