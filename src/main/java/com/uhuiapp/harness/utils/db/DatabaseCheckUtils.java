@@ -9,16 +9,16 @@ import java.sql.Statement;
  */
 public class DatabaseCheckUtils {
 
-    public boolean checkUserName(String expectName, String column){
+    public boolean checkUserName(String expectValue, String column){
         Connection conn ;
-        String sql = "select * from user where name="+"\'"+expectName+"\'";
+        String sql = "select * from user where name="+"\'"+expectValue+"\'";
         try {
             conn= DatabaseConnectionFactory.getDatabaseConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs =stmt.executeQuery(sql);
             while (rs.next()){
                 String name = rs.getString(column);
-                if (name.equalsIgnoreCase(expectName)){
+                if (name.equalsIgnoreCase(expectValue)){
                     rs.close();
                     stmt.close();
                     conn.close();
