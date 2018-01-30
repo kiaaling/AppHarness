@@ -50,6 +50,8 @@ dependencies {
     compile group: 'com.aventstack', name: 'extentreports', version: '3.0.3'
 
     compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.2.0'
 
 /*    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'commons-configuration:commons-configuration:1.10'

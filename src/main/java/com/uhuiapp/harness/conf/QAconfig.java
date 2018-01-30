@@ -150,4 +150,23 @@ public class QAconfig {
     public String getBaseUrl() {
         return configuration.getString("harness.webserver.baseurl", "http://localhost");
     }
+
+
+    public String getDatabaseType() {
+        return configuration.getString("harness.database.type", "mysql");
+    }
+
+
+    public String getDatabaseUri() {
+        return configuration.getString("harness.database.uri");
+    }
+
+    public String getDatabaseUser() {
+        return configuration.getString("harness.database.user");
+    }
+
+
+    public String getDatabasePassword() {
+        return configuration.getString("harness.database.password");
+    }
 }
