@@ -1,10 +1,15 @@
 package com.uhuiapp.harness.testcases.common.person;
 
 import com.uhuiapp.harness.testcases.AppiumBasicTest;
+import com.uhuiapp.harness.utils.mybatis.MybatisSqlSessionFactory;
+import com.uhuiapp.harness.utils.mybatis.talent.User;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * Created by zhaoxiong on 2018/1/15.
@@ -80,6 +85,19 @@ public class EditResumeTest extends AppiumBasicTest {
     }
 
     private void checkDatabase() {
+/*
+        SqlSession session = null;
+        try {
+            session = MybatisSqlSessionFactory.getSqlSession();
+            List<User> users = session.selectList("mappers.talent.UserMapper.selectAll");
+            System.out.println("");
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        */
 
     }
 

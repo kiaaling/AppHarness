@@ -157,4 +157,4 @@ function splitJvmOpts() {
 eval splitJvmOpts \$DEFAULT_JVM_OPTS \$JAVA_OPTS \$${optsEnvironmentVar}
 <% if ( appNameSystemProperty ) { %>JVM_OPTS[\${#JVM_OPTS[*]}]="-D${appNameSystemProperty}=\$APP_BASE_NAME"<% } %>
 
-exec "\$JAVACMD" "\${JVM_OPTS[@]}" -classpath "\$CLASSPATH" -Dharness.home="\$APP_HOME" -Dlog4j.configurationFile="\$APP_HOME/conf/log4j2.xml" ${mainClassName} "\$@"
+exec "\$JAVACMD" "\${JVM_OPTS[@]}" -classpath "\$CLASSPATH:\$APP_HOME/conf" -Dharness.home="\$APP_HOME" -Dlog4j.configurationFile="\$APP_HOME/conf/log4j2.xml" ${mainClassName} "\$@"

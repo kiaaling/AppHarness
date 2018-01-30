@@ -52,15 +52,13 @@ dependencies {
     compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.2.0'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.5'
 
 /*    compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'commons-configuration:commons-configuration:1.10'
     compile "$springGroup:spring-context:$springVersion"
     compile "$springGroup:spring-jdbc:$springVersion"
 
-    compile 'mysql:mysql-connector-java:5.1.38'
-    compile 'org.mybatis:mybatis-spring:1.2.3'
-    compile 'org.mybatis:mybatis:3.3.0'
     compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.25'
 
     compile group: 'redis.clients', name: 'jedis', version: '2.9.0'*/
