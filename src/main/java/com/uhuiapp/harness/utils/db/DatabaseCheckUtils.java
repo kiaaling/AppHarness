@@ -9,7 +9,7 @@ import java.sql.Statement;
  */
 public class DatabaseCheckUtils {
 
-    public boolean checkUserName(String expectName){
+    public boolean checkUserName(String expectName, String column){
         Connection conn ;
         String sql = "select * from user where name="+"\'"+expectName+"\'";
         try {
@@ -17,7 +17,7 @@ public class DatabaseCheckUtils {
             Statement stmt = conn.createStatement();
             ResultSet rs =stmt.executeQuery(sql);
             while (rs.next()){
-                String name = rs.getString("name");
+                String name = rs.getString(column);
                 if (name.equalsIgnoreCase(expectName)){
                     rs.close();
                     stmt.close();
@@ -25,7 +25,9 @@ public class DatabaseCheckUtils {
                     return true;
                 }
             }
-
+            rs.close();
+            stmt.close();
+            conn.close();
         }catch (Exception e){
 
         }
