@@ -7,6 +7,24 @@
         <result property = "id" column = "id"/>
     </resultMap>
 
+    <insert id = "insert" parameterType = "User">
+        INSERT INTO USER (name, mobile_phone, email) VALUES (#{name}, #{mobile_phone}, #{email});
+        <selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+            select last_insert_id() as id
+        </selectKey>
+    </insert>
+
+    <delete id = "deleteById" parameterType = "int">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+
+    <update id = "update" parameterType = "User">
+        UPDATE user SET NAME = #{name},
+        email = #{email},
+        mobile_phone = #{mobile_phone}
+        WHERE ID = #{id}
+    </update>
+
     <select id="selectUser" resultType="User">
         select * from user where id = #{id}
     </select>
