@@ -2,6 +2,7 @@ package com.uhuiapp.harness;
 
 import com.uhuiapp.harness.testng.ExtentTestNGIReporterListener;
 import com.uhuiapp.harness.utils.QAContext;
+import com.uhuiapp.harness.utils.TextCrypto;
 import org.apache.commons.cli.*;
 import org.testng.TestNG;
 
@@ -36,6 +37,7 @@ public class qatool {
         if(cmd.hasOption('h')){
             printHelpMessages(options);
         }
+        encryptPassword(cmd);
         List<String>  appTypes = Arrays.asList("android", "ios", "windows" ,"web");
         if(cmd.hasOption('t')){
             if(appTypes.contains(cmd.getOptionValue('t'))){
@@ -50,6 +52,21 @@ public class qatool {
         }
     }
 
+    private static void encryptPassword(CommandLine cmd) {
+        if(cmd.hasOption('e')){
+            TextCrypto encryptor = new TextCrypto();
+            String encryptText = "";
+            try {
+                encryptText = encryptor.encryptPassword(cmd.getOptionValue('e'));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            System.out.println(encryptText);
+
+            System.exit(0);
+        }
+    }
+
     private static void printHelpMessages(Options options) {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("AppiumHarness", options);
@@ -58,6 +75,7 @@ public class qatool {
 
     private static Options getCommandOptions() {
         Options options = new Options();
+        options.addOption("e","encrypt",true,"encrypt a text");
         options.addOption("t","apptype",true, "Give the app type which be tested. This parameter can be android|ios|windows|web .");
         options.addOption("h","help",false, "Print this help messages.");
         return options;
