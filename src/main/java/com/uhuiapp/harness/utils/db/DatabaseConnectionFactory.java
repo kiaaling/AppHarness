@@ -2,6 +2,7 @@ package com.uhuiapp.harness.utils.db;
 
 import com.uhuiapp.harness.utils.QAContext;
 import org.apache.commons.dbcp2.ConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnection;
 import org.apache.commons.dbcp2.PoolableConnectionFactory;
 import org.apache.commons.dbcp2.PoolingDriver;
 import org.apache.commons.pool2.ObjectPool;
@@ -31,7 +32,7 @@ public class DatabaseConnectionFactory {
         PoolableConnectionFactory poolfactory = new PoolableConnectionFactory(connectionFactory, null);
 
         // 4. Create the Pool with the PoolableConnection objects
-        ObjectPool connectionPool = new GenericObjectPool(poolfactory);
+        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolfactory);
 
         // 5. Set the objectPool to enforces the association (prevent bugs)
         poolfactory.setPool(connectionPool);

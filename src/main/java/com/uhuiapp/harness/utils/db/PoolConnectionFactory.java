@@ -2,6 +2,7 @@ package com.uhuiapp.harness.utils.db;
 
 import org.apache.commons.dbcp2.ConnectionFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnection;
 import org.apache.commons.dbcp2.PoolingDriver;
 import org.apache.commons.pool2.ObjectPool;
 
@@ -72,7 +73,7 @@ public class PoolConnectionFactory {
      * @param poolName
      * @param pool
      */
-    public static void registerPool(String poolName, ObjectPool pool) {
+    public static void registerPool(String poolName, ObjectPool<PoolableConnection> pool) {
         driver.registerPool(poolName, pool);
     }
 
