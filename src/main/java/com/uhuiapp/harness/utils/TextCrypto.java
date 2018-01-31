@@ -1,10 +1,8 @@
 package com.uhuiapp.harness.utils;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 
 /**
  * Created by zhaoxiong on 2018/1/31.
@@ -20,7 +18,7 @@ public class TextCrypto {
             Cipher cipher=Cipher.getInstance("Blowfish");
             cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
             byte[] encrypted=cipher.doFinal(strClearText.getBytes("UTF-8"));
-            strData=new BASE64Encoder().encode(encrypted);
+            strData=Base64.getEncoder().encodeToString(encrypted);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,7 +34,7 @@ public class TextCrypto {
             SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes("UTF-8"),"Blowfish");
             Cipher cipher=Cipher.getInstance("Blowfish");
             cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-            byte[] decrypted=cipher.doFinal(new BASE64Decoder().decodeBuffer(strEncrypted));
+            byte[] decrypted=cipher.doFinal(Base64.getDecoder().decode(strEncrypted));
             strData=new String(decrypted);
         } catch (Exception e) {
             e.printStackTrace();
