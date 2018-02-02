@@ -15,14 +15,14 @@ import java.sql.DriverManager;
  * Created by zhaoxiong on 2018/1/29.
  */
 public class DatabaseConnectionFactory {
-    private static final String databaseType = QAContext.qAconfig.getDatabaseType();
+    private static final String driverClassName = QAContext.qAconfig.getDatabaseDriver();
     private static final String uri = QAContext.qAconfig.getDatabaseUri();
     private static final String user = QAContext.qAconfig.getDatabaseUser();
     private static final String password = QAContext.qAconfig.getDatabasePassword();
 
     public static Connection getDatabaseConnection() throws Exception{
+
         // 1. Register the Driver to the jbdc.driver java property
-        String driverClassName = getDriverClassName();
         PoolConnectionFactory.registerJDBCDriver(driverClassName);
 
         // 2. Create the Connection Factory (DriverManagerConnectionFactory)
@@ -42,17 +42,5 @@ public class DatabaseConnectionFactory {
         dbcpDriver.registerPool("dbcp-harness", connectionPool);
 
         return  DriverManager.getConnection("jdbc:apache:commons:dbcp:dbcp-harness");
-    }
-
-    private static String getDriverClassName() {
-        String driverClassName="";
-        if(databaseType.equalsIgnoreCase("oracle")){
-            driverClassName = PoolConnectionFactory.ORACLE_DRIVER;
-        }else if(databaseType.equalsIgnoreCase("mysql")){
-            driverClassName = PoolConnectionFactory.MYSQL_DRIVER;
-        }else {
-            System.err.println("Doesn't supported database type");
-        }
-        return driverClassName;
     }
 }

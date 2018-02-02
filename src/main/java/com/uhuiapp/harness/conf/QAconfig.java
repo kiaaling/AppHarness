@@ -1,5 +1,6 @@
 package com.uhuiapp.harness.conf;
 
+import com.uhuiapp.harness.utils.TextCrypto;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FileUtils;
@@ -12,11 +13,13 @@ import java.util.List;
 
 public class QAconfig {
     private Configuration configuration;
+    private Configuration jdbcConfiguration;
     private String appType = "";
 
     public QAconfig() {
         try {
-            configuration = new PropertiesConfiguration(getConfigFile());
+            configuration = new PropertiesConfiguration(getConfigFile("harness"));
+            jdbcConfiguration = new PropertiesConfiguration(getConfigFile("jdbc"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,10 +64,15 @@ public class QAconfig {
         }
     }
 
-    private File getConfigFile() throws IOException {
+    private File getConfigFile(String type) throws IOException {
         File confFile = null;
         try {
-            confFile = new File(System.getProperty("harness.home"), "conf/harness.conf");
+            if(type.equalsIgnoreCase("jdbc")){
+                confFile = new File(System.getProperty("harness.home"), "conf/harness.conf");
+            }else {
+                confFile = new File(System.getProperty("harness.home"), "conf/jdbc.properties");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,21 +160,34 @@ public class QAconfig {
     }
 
 
-    public String getDatabaseType() {
-        return configuration.getString("harness.database.type", "mysql");
+    public String getDatabaseDriver() {
+        return jdbcConfiguration.getString("jdbc.driver", "com.mysql.jdbc.Driver");
     }
 
 
     public String getDatabaseUri() {
-        return configuration.getString("harness.database.uri");
+        return jdbcConfiguration.getString("jdbc.url");
     }
 
     public String getDatabaseUser() {
-        return configuration.getString("harness.database.user");
+        return jdbcConfiguration.getString("jdbc.username");
     }
 
 
     public String getDatabasePassword() {
-        return configuration.getString("harness.database.password");
+        String encryptPass = jdbcConfiguration.getString("jdbc.password");
+        String decryptPass = decryptUserPassword(encryptPass);
+        return decryptPass;
+    }
+
+    private static String decryptUserPassword(String encryptPassword) {
+        TextCrypto encryptor = new TextCrypto();
+        String decryptText = "";
+        try {
+            decryptText = encryptor.decryptPassword(encryptPassword);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return decryptText;
     }
 }
